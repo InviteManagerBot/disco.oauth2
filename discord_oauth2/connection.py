@@ -7,7 +7,10 @@ from .integration import ServerIntegration
 
 if TYPE_CHECKING:
     from .user import User
-    from .types import IntegrationType as ConnectionType, Connection as ConnectionPayload
+    from .types import (
+        IntegrationType as ConnectionType,
+        Connection as ConnectionPayload,
+    )
 
 __all__ = ("Connection",)
 

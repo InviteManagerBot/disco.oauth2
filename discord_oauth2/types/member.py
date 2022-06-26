@@ -2,11 +2,13 @@ from typing import TypedDict, Optional
 from .snowflake import SnowflakeList
 from .user import User
 
+
 class PartialMember(TypedDict):
     roles: SnowflakeList
     joined_at: str
     deaf: bool
     mute: bool
+
 
 class Member(PartialMember, total=False):
     avatar: str

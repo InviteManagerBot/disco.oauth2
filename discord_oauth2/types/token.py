@@ -1,5 +1,6 @@
 from typing import TypedDict
 
+
 class AccessToken(TypedDict):
     access_token: str
     token_type: str

@@ -40,9 +40,7 @@ class HTTPException(Oauth2Exception):
         e.g. 404, 403, 500
     """
 
-    def __init__(
-        self, response: Response, message: Union[str, Dict[str, Any]]
-    ) -> None:
+    def __init__(self, response: Response, message: Union[str, Dict[str, Any]]) -> None:
         self.response: Response = response
         self.status = response.status
 
