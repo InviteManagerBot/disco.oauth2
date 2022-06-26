@@ -14,10 +14,10 @@ py -3 -m pip install -U disco.oauth2
 To install the development version (lastest), do the following:
 ```bash
 # Linux/FreeBSD
-python3 -m pip install -U https://github.com/InviteManagerBot/discord.oauth2
+python3 -m pip install -U https://github.com/InviteManagerBot/disco.oauth2
 
 # Windows
-py -3 -m pip install -U https://github.com/InviteManagerBot/discord.oauth2
+py -3 -m pip install -U https://github.com/InviteManagerBot/disco.oauth2
 ```
 ## Getting started
 ### Quick Example
