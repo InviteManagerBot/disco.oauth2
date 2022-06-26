@@ -57,7 +57,7 @@ async def main():
 Optionally you may install the [`orjson`](https://github.com/ijl/orjson) libraries (highly recommended for sake of speed).
 
 ## License
-`discord_oauth2` is offered under the [MIT](https://opensource.org/licenses/MIT) license.
+`discord_oauth2` was written by martimartins <martim13artins13@gmail.com>, licensed under the [MIT](https://opensource.org/licenses/MIT) license.
 
 ## Contributing
 All contributions are welcome ;)
