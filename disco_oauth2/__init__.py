@@ -1,5 +1,5 @@
-__title__ = "discord-oauth"
-__author__ = "Martim Martins"
+__title__ = "disco.oauth"
+__author__ = "martimartins"
 __author_email__ = "martim13artins13@gmail.com"
 __license__ = "MIT"
 __copyright__ = "Copyright 2022-present Martim Martins"

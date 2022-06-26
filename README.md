@@ -6,23 +6,23 @@ To install [Python >3.8](https://www.python.org/downloads/release/python-370/) i
 You can run the following command to install the library:
 ```bash
 # Linux/FreeBSD
-python3 -m pip install -U discord-oauth2
+python3 -m pip install -U disco.oauth2
 
 # Windows
-py -3 -m pip install -U discord-oauth2
+py -3 -m pip install -U disco.oauth2
 ```
 To install the development version (lastest), do the following:
 ```bash
 # Linux/FreeBSD
-python3 -m pip install -U https://github.com/InviteManagerBot/discord-oauth2
+python3 -m pip install -U https://github.com/InviteManagerBot/discord.oauth2
 
 # Windows
-py -3 -m pip install -U https://github.com/InviteManagerBot/discord-oauth2
+py -3 -m pip install -U https://github.com/InviteManagerBot/discord.oauth2
 ```
 ## Getting started
 ### Quick Example
 ```py
-from discord_oauth2.client import Client
+from disco_oauth2.client import Client
 
 client = Client(
     client_id=my_client_id_here,

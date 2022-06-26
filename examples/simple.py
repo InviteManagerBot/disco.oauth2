@@ -1,4 +1,4 @@
-from discord_oauth2.client import Client
+from disco_oauth2.client import Client
 
 client = Client(
     client_id=123,

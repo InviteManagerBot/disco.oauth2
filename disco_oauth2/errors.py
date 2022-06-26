@@ -17,7 +17,7 @@ __all__ = (
 
 
 class Oauth2Exception(Exception):
-    """Base exception class for discord-oauth2"""
+    """Base exception class for discord oauth2"""
 
     pass
 
