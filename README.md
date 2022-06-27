@@ -2,7 +2,7 @@
 A modern, easy to use discord OAuth2 API wrapper written in Python.
 
 ## Installing
-To install [Python >3.8](https://www.python.org/downloads/release/python-370/) is required.
+> [Python >3.8](https://www.python.org/downloads/release/python-370/) is required.
 You can run the following command to install the library:
 ```bash
 $ pip install disco.oauth2
