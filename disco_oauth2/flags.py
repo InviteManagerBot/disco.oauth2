@@ -120,10 +120,7 @@ class Permissions(BaseFlags):
 
     @flag
     def manage_messages(self):
-        """:class:`bool`: Returns ``True`` if a user can delete or pin messages in a text channel.
-        .. note::
-            Note that there are currently no ways to edit other people's messages.
-        """
+        """:class:`bool`: Returns ``True`` if a user can delete or pin messages in a text channel."""
         return 1 << 13
 
     @flag
