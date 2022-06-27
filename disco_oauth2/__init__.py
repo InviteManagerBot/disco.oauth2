@@ -1,4 +1,4 @@
-__title__ = "disco.oauth"
+__title__ = "disco.oauth2"
 __author__ = "martimartins"
 __author_email__ = "martim13artins13@gmail.com"
 __license__ = "MIT"
@@ -14,6 +14,11 @@ from .guild import *
 from .http import *
 from .token import *
 from .user import *
+from .connection import *
+from .integration import *
+from .member import *
+from .token import *
+from .appinfo import *
 
 _VersionInfo = NamedTuple(
     "_VersionInfo",

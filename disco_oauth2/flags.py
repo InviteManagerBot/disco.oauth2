@@ -1,5 +1,10 @@
-from typing import Any, Callable, Optional
+from __future__ import annotations
+
+from typing import Any, Callable, Optional, Type, overload, TYPE_CHECKING
 from .utils import copy_doc
+
+if TYPE_CHECKING:
+    from typing_extensions import Self
 
 __all__ = ("Permissions", "UserFlags")
 
@@ -22,9 +27,17 @@ class flag:
         self.flag: int = f(None)
         self.__doc__: Optional[str] = f.__doc__
 
-    def __get__(self, instance: BaseFlags, owner: Any):
+    @overload
+    def __get__(self, instance: None, owner: Type[BaseFlags]) -> Self:
+        ...
+
+    @overload
+    def __get__(self, instance: BaseFlags, owner: Type[BaseFlags]) -> bool:
+        ...
+
+    def __get__(self, instance: BaseFlags, owner: Type[BaseFlags]) -> Any:
         if instance is None:
-            return None
+            return self
         return instance._has_flag(self.flag)
 
     def __repr__(self):
@@ -140,9 +153,7 @@ class Permissions(BaseFlags):
 
     @flag
     def view_guild_insights(self):
-        """:class:`bool`: Returns ``True`` if a user can view the guild's insights.
-        .. versionadded:: 1.3
-        """
+        """:class:`bool`: Returns ``True`` if a user can view the guild's insights."""
         return 1 << 19
 
     @flag

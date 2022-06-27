@@ -18,7 +18,7 @@ if TYPE_CHECKING:
     from .user import User
     from datetime import datetime
 
-__all__ = ("ExpireBehavior", "ServerIntegration")
+__all__ = ("ExpireBehavior", "IntegrationAccount", "ServerIntegration")
 
 
 class ExpireBehavior(Enum):

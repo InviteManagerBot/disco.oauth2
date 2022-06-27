@@ -5,24 +5,16 @@ A modern, easy to use discord OAuth2 API wrapper written in Python.
 To install [Python >3.8](https://www.python.org/downloads/release/python-370/) is required.
 You can run the following command to install the library:
 ```bash
-# Linux/FreeBSD
-python3 -m pip install -U disco.oauth2
-
-# Windows
-py -3 -m pip install -U disco.oauth2
+$ pip install disco.oauth2
 ```
 To install the development version (lastest), do the following:
 ```bash
-# Linux/FreeBSD
-python3 -m pip install -U https://github.com/InviteManagerBot/disco.oauth2
-
-# Windows
-py -3 -m pip install -U https://github.com/InviteManagerBot/disco.oauth2
+$ pip install -U https://github.com/InviteManagerBot/disco.oauth2
 ```
 ## Getting started
 ### Quick Example
 ```py
-from disco_oauth2.client import Client
+from disco_oauth2 import Client
 
 client = Client(
     client_id=my_client_id_here,
