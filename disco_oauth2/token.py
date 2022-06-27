@@ -6,8 +6,6 @@ from datetime import datetime, timedelta
 if TYPE_CHECKING:
     from .types import AccessToken as AccessTokenPayload
 
-    from typing_extensions import Self
-
 __all__ = ("AccessToken",)
 
 
