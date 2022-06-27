@@ -1,9 +1,9 @@
-from disco_oauth2.client import Client
+from disco_oauth2 import Client
 
 client = Client(
-    client_id=123,
-    client_secret="*",
-    redirect_uri="https://google.pt",
+    client_id=..., # my_client_id_here
+    client_secret="client_secret_here",
+    redirect_uri="redirect_uri_here",
     scopes=["identify", "guilds", "email", "connections"],
 )
 
