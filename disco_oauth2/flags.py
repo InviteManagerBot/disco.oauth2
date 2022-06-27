@@ -35,7 +35,7 @@ class flag:
     def __get__(self, instance: BaseFlags, owner: Type[BaseFlags]) -> bool:
         ...
 
-    def __get__(self, instance: BaseFlags, owner: Type[BaseFlags]) -> Any:
+    def __get__(self, instance: Optional[BaseFlags], owner: Type[BaseFlags]) -> Any:
         if instance is None:
             return self
         return instance._has_flag(self.flag)
