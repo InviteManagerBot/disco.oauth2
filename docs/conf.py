@@ -70,4 +70,4 @@ html_theme = "furo"
 html_static_path = ["_static"]
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'friendly'
+pygments_style = "friendly"

@@ -33,6 +33,9 @@ class AccessToken:
         self.scope: str = data["scope"]
         self.expires_in: int = data["expires_in"]
 
+    def __repr__(self) -> str:
+        return f"<{self.__class__.__name__} scope={self.scope} expires_in={self.expires_in}>"
+
     @property
     def expires_at(self) -> datetime:
         return datetime.now() - timedelta(seconds=self.expires_in)
