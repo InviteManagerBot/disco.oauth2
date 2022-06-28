@@ -183,6 +183,7 @@ class User(BaseUser):
     mfa_enabled: :class:`bool`
         Specifies if the user has MFA turned on.
     """
+
     __slots__ = ("__weakref__",)
 
     async def refresh(self) -> AccessToken:
