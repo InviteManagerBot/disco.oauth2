@@ -3,7 +3,7 @@ __author__ = "martimartins"
 __author_email__ = "martim13artins13@gmail.com"
 __license__ = "MIT"
 __copyright__ = "Copyright 2022-present Martim Martins"
-__version__ = "1.0a"
+__version__ = "1.1a"
 
 from typing import Literal, NamedTuple
 

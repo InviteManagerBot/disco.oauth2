@@ -1,6 +1,5 @@
 import aiohttp
 import asyncio
-import os
 
 from weakref import WeakValueDictionary
 from typing import List, Literal, Optional
