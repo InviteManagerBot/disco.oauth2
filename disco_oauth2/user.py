@@ -17,48 +17,6 @@ __all__ = ("BaseUser", "User", "PartialUser")
 
 
 class BaseUser:
-    """Represents your Discord user that contains information from the OAuth2 API.
-
-    .. container:: operations
-
-        ..  describe:: x == y
-
-            Compare the ids of the two users and verify that they are the same.
-
-        .. describe:: x != y
-
-            Compare the ids of the two users and verify that they are the different.
-
-        .. describe:: hash(x)
-
-            Return the user's hash.
-
-        .. describe:: str(x)
-
-            Returns the user's id with discriminator.
-
-    Attributes
-    -----------
-    id: :class:`int`
-        The user's unique id.
-    name: :class:`str`
-        The user's username.
-    discriminator: :class:`str`
-        The user's discriminator.
-    email: Optional[:class:`str`]
-        The user's email.
-    bot: :class:`bool`
-        If the current user is a bot account.
-    system: :class:`bool`
-        If the user is a system user.
-    verified: :class:`bool`
-        If the user's email is verified.
-    locale: Optional[:class:`str`]
-        The IETF language tag used to identify the language the user is using.
-    mfa_enabled: :class:`bool`
-        Specifies if the user has MFA turned on.
-    """
-
     __slots__ = (
         "id",
         "name",
@@ -184,6 +142,47 @@ class BaseUser:
 
 
 class User(BaseUser):
+    """Represents your Discord user that contains information from the OAuth2 API.
+
+    .. container:: operations
+
+        ..  describe:: x == y
+
+            Compare the ids of the two users and verify that they are the same.
+
+        .. describe:: x != y
+
+            Compare the ids of the two users and verify that they are the different.
+
+        .. describe:: hash(x)
+
+            Return the user's hash.
+
+        .. describe:: str(x)
+
+            Returns the user's id with discriminator.
+
+    Attributes
+    -----------
+    id: :class:`int`
+        The user's unique id.
+    name: :class:`str`
+        The user's username.
+    discriminator: :class:`str`
+        The user's discriminator.
+    email: Optional[:class:`str`]
+        The user's email.
+    bot: :class:`bool`
+        If the current user is a bot account.
+    system: :class:`bool`
+        If the user is a system user.
+    verified: :class:`bool`
+        If the user's email is verified.
+    locale: Optional[:class:`str`]
+        The IETF language tag used to identify the language the user is using.
+    mfa_enabled: :class:`bool`
+        Specifies if the user has MFA turned on.
+    """
     __slots__ = ("__weakref__",)
 
     async def refresh(self) -> AccessToken:
