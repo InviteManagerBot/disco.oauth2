@@ -1,4 +1,7 @@
 # Discord OAuth2
+[![Documentation Status](https://readthedocs.org/projects/discooauth2/badge/?version=latest)](https://discooauth2.readthedocs.io/en/latest/?badge=latest)
+[![Pypi version](https://img.shields.io/pypi/v/disco.oauth2)](https://pypi.org/project/disco.oauth2/)
+
 A modern, easy to use discord OAuth2 API wrapper written in Python.
 
 ## Installing
