@@ -3,9 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
-    from .types import (
-        IntegrationApp as IntegrationAppPayload,
-    )
+    from .types import IntegrationApp as IntegrationAppPayload, User as UserPayload
 
 __all__ = ("IntegrationApp",)
 
@@ -28,7 +26,6 @@ class IntegrationApp:
         "name",
         "_icon_hash",
         "description",
-        "bot",
     )
 
     def __init__(self, data: IntegrationAppPayload) -> None:

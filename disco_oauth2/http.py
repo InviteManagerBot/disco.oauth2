@@ -229,7 +229,7 @@ class AsyncHTTP(BaseHTTP):
         self.http_trace: Optional[aiohttp.TraceConfig] = http_trace
         self.__session: aiohttp.ClientSession = self._create_session()
 
-        user_agent = "OAuth2 (https://github.com/InviteManagerBot/discord.oauth2 {0}) Python/{1[0]}.{1[1]} aiohttp/{2}"
+        user_agent = "OAuth2 (https://github.com/InviteManagerBot/disco.oauth2 {0}) Python/{1[0]}.{1[1]} aiohttp/{2}"
         self.user_agent = user_agent.format(
             __version__, sys.version_info, aiohttp.__version__
         )

@@ -80,13 +80,13 @@ class Member:
 
     def __init__(self, data: MemberPayload, user: User, guild: Guild) -> None:
         self.user: User = user
+        self.guild: Guild = guild
 
+        # Update the user object with new data
         try:
             self.user._update(data["user"])
         except KeyError:
             pass
-
-        self.guild: Guild = guild
 
         self.nick: Optional[str] = data.get("nick")
         self._avatar_hash: Optional[str] = data.get("avatar")

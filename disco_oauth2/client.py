@@ -1,12 +1,14 @@
 import aiohttp
 import asyncio
+import os
 
 from weakref import WeakValueDictionary
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from .http import AsyncHTTP
 from .token import AccessToken
 from .user import User, PartialUser
+from .utils import MISSING
 
 __all__ = ("Client",)
 
@@ -127,6 +129,66 @@ class Client:
         user = User(http=self.http, access_token=access_token, data=data)
         self._users[user.id] = user
         return user
+
+    def get_oauth_url(
+        self,
+        *,
+        prompt: Optional[str] = MISSING,
+        state: Optional[str] = MISSING,
+        response_type: Optional[Literal["code", "token"]] = "code",
+        disable_guild_select: Optional[bool] = MISSING,
+        guild_id: Optional[int] = MISSING,
+        permissions: Optional[int] = MISSING,
+    ) -> str:
+        """Returns the OAuth2 URL to authorize this application.
+
+        Parameters
+        ----------
+        prompt: Optional[:class:`bool`]
+            Controls how existing authorizations are handled, either consent or none.
+            You must have scopes set to use this.
+        state: Optional[:class:`str`]
+            A unique cryptographically secure hash.
+            _<https://discord.com/developers/docs/topics/oauth2#state-and-security>
+        response_type: Optional[Literal["code", "token"]]
+            The response type, either code or token.
+            The `token` is for client-side web applications only.
+            Defaults ``code``.
+        disable_guild_select: Optional[:class:`bool`]
+            Disallows the user from changing the guild for the bot invite, either true or false.
+            You must have the scope `bot` to use this.
+        guild_id: Optional[:class:`bool`]
+            The guild id to pre-fill at authorization url.
+            You must have the scope `bot` to use this.
+        permissions: Optional[:class:`int`]
+            The permissions flags for the bot invite.
+            You must have the scope `bot` to use this.
+        """
+        from urllib.parse import quote
+
+        base = f"https://discord.com/api/oauth2/authorize?client_id={self.client_id}"
+        
+        if self.scopes:
+            base += f"&scope={'+'.join(self.scopes)}"
+
+        if prompt is not MISSING:
+            base += f"&prompt={prompt}"
+        if state is not MISSING:
+            base += f"&state={quote(state)}"
+        if "bot" in self.scopes:
+            if disable_guild_select is not MISSING:
+                base += f"&disable_guild_select={prompt}"
+            if guild_id is not MISSING:
+                base += f"&guild_id={guild_id}"
+            if permissions is not MISSING:
+                base += f"&permissions={permissions}"
+
+        base += (
+            f"&response_type={response_type}"
+            f"&redirect_uri={quote(self.redirect_uri)}"
+        )
+
+        return base
 
     def get_user(self, id: int, /) -> Optional[User]:
         """Returns a user with the given ID
