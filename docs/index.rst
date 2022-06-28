@@ -14,7 +14,6 @@ Key Features
 - Modern Pythonic API using ``async``\/``await`` syntax.
 - Easy to use with an object oriented design.
 - Sane rate limit handling that prevents 429s.
-- Optimised for both speed and memory
 
 Library Installation
 --------------------
