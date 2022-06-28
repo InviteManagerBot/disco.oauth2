@@ -62,6 +62,12 @@ class _Missing:
 
 
 MISSING: Any = _Missing()
+DISCORD_EPOCH: int = 1420070400000
+
+
+def snowflake_time(id: int) -> datetime.datetime:
+    timestmap = ((id >> 22) + DISCORD_EPOCH) / 1000
+    return datetime.datetime.fromtimestamp(timestmap, tz=datetime.timezone.utc)
 
 
 @overload

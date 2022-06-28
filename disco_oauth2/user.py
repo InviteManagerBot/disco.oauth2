@@ -5,12 +5,15 @@ from typing import TYPE_CHECKING, Optional, List
 from .guild import Guild
 from .connection import Connection
 from .flags import UserFlags
+from .utils import snowflake_time
 
 if TYPE_CHECKING:
     from .types.user import PartialUser as UserPayload
     from .http import AsyncHTTP
     from .token import AccessToken
     from .types import Snowflake
+
+    from datetime import datetime
 
 
 __all__ = ("BaseUser", "User", "PartialUser")
@@ -139,6 +142,11 @@ class BaseUser:
     def mention(self) -> str:
         """:class:`str`: Returns a string format to mention this user in discord."""
         return f"<@{self.id}>"
+
+    @property
+    def created_at(self) -> datetime:
+        """:class:`datetime.datetime`: Returns the date of when the user account was created in UTC."""
+        return snowflake_time(self.id)
 
 
 class User(BaseUser):
