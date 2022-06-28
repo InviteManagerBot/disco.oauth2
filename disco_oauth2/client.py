@@ -65,7 +65,7 @@ class Client:
         self.client_id: int = client_id
         self._client_secret: str = client_secret
         self.redirect_uri: str = redirect_uri
-        self.scopes: Optional[List[str]] = scopes
+        self.scopes: List[str] = scopes or []
         self.http: AsyncHTTP = AsyncHTTP(
             client_id=client_id,
             client_secret=client_secret,
@@ -133,41 +133,41 @@ class Client:
     def get_oauth_url(
         self,
         *,
-        prompt: Optional[str] = MISSING,
-        state: Optional[str] = MISSING,
-        response_type: Optional[Literal["code", "token"]] = "code",
-        disable_guild_select: Optional[bool] = MISSING,
-        guild_id: Optional[int] = MISSING,
-        permissions: Optional[int] = MISSING,
+        prompt: str = MISSING,
+        state: str = MISSING,
+        response_type: Literal["code", "token"] = "code",
+        disable_guild_select: bool = MISSING,
+        guild_id: int = MISSING,
+        permissions: int = MISSING,
     ) -> str:
         """Returns the OAuth2 URL to authorize this application.
 
         Parameters
         ----------
-        prompt: Optional[:class:`bool`]
+        prompt: :class:`bool`
             Controls how existing authorizations are handled, either consent or none.
             You must have scopes set to use this.
-        state: Optional[:class:`str`]
+        state: :class:`str`
             A unique cryptographically secure hash.
             _<https://discord.com/developers/docs/topics/oauth2#state-and-security>
-        response_type: Optional[Literal["code", "token"]]
+        response_type: Literal["code", "token"]
             The response type, either code or token.
             The `token` is for client-side web applications only.
             Defaults ``code``.
-        disable_guild_select: Optional[:class:`bool`]
+        disable_guild_select: :class:`bool`
             Disallows the user from changing the guild for the bot invite, either true or false.
             You must have the scope `bot` to use this.
-        guild_id: Optional[:class:`bool`]
+        guild_id: :class:`bool`
             The guild id to pre-fill at authorization url.
             You must have the scope `bot` to use this.
-        permissions: Optional[:class:`int`]
+        permissions: :class:`int`
             The permissions flags for the bot invite.
             You must have the scope `bot` to use this.
         """
         from urllib.parse import quote
 
         base = f"https://discord.com/api/oauth2/authorize?client_id={self.client_id}"
-        
+
         if self.scopes:
             base += f"&scope={'+'.join(self.scopes)}"
 
