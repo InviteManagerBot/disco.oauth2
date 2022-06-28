@@ -31,6 +31,7 @@ User
 ~~~~
 
 .. autoclass:: User()
+    :inherited-members:
     :members:
 
 Guild
