@@ -13,7 +13,7 @@ $ pip install disco.oauth2
 ```
 To install the development version (lastest), do the following:
 ```bash
-$ pip install -U https://github.com/InviteManagerBot/disco.oauth2
+$ pip install https://github.com/InviteManagerBot/disco.oauth2
 ```
 ## Getting started
 ### Quick Example
@@ -21,7 +21,7 @@ $ pip install -U https://github.com/InviteManagerBot/disco.oauth2
 from disco_oauth2 import Client
 
 client = Client(
-    client_id=my_client_id_here,
+    client_id=client_id_here,
     client_secret="client_secret_here",
     redirect_uri="redirect_uri_here",
     scopes=["identify", "guilds", "email", "connections"],
@@ -29,7 +29,7 @@ client = Client(
 
 
 async def main():
-    # Exchange a code that I received from callback to redirect url.
+    # Exchange a code received from the callback from the redirect url.
     access_token = await client.exchange_code("my_code")
 
     # Fetch user's information with access token.

@@ -1,7 +1,7 @@
 from disco_oauth2 import Client
 
 client = Client(
-    client_id=123,  # my_client_id_here
+    client_id=0,
     client_secret="client_secret_here",
     redirect_uri="redirect_uri_here",
     scopes=["identify", "guilds", "email", "connections"],
@@ -9,7 +9,7 @@ client = Client(
 
 
 async def main():
-    # Exchange a code that I received from callback to redirect url.
+    # Exchange a code received from the callback from the redirect url.
     access_token = await client.exchange_code("my_code")
 
     # Fetch user's information with access token.
