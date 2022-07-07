@@ -3,7 +3,7 @@ __author__ = "martimartins"
 __author_email__ = "martim13artins13@gmail.com"
 __license__ = "MIT"
 __copyright__ = "Copyright 2022-present Martim Martins"
-__version__ = "1.1a"
+__version__ = "1.2a"
 
 from typing import Literal, NamedTuple
 
@@ -29,4 +29,4 @@ _VersionInfo = NamedTuple(
     serial=int,
 )
 
-version_info = _VersionInfo(major=1, minor=0, micro=0, releaselevel="alpha", serial=0)
+version_info = _VersionInfo(major=1, minor=2, micro=0, releaselevel="alpha", serial=0)
