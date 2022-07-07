@@ -13,7 +13,7 @@ $ pip install disco.oauth2
 ```
 To install the development version (lastest), do the following:
 ```bash
-$ pip install https://github.com/InviteManagerBot/disco.oauth2
+$ pip install git+https://github.com/InviteManagerBot/disco.oauth2.git
 ```
 ## Getting started
 ### Quick Example
