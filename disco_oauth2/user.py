@@ -6,6 +6,7 @@ from .guild import Guild
 from .connection import Connection
 from .flags import UserFlags
 from .utils import snowflake_time
+from .member import Member
 
 if TYPE_CHECKING:
     from .types.user import PartialUser as UserPayload
@@ -274,6 +275,23 @@ class User(BaseUser):
         data = await self._http.get_user_connections(self._access_token.access_token)
         self.connections = [Connection(x, self) for x in data]
         return self.connections
+
+    async def fetch_member(self, guild_id: int) -> Member:
+        """Fetch the user's object member from guild ID.
+
+        You must have the scope `guilds.members.read` to use this.
+
+        Parameters
+        ----------
+        guild_id: :class:`int`
+            The guild's ID that the user is member of
+
+        Returns
+        --------
+        :class:`Member`
+        """
+        data = await self._http.get_member(self._access_token.access_token, guild_id)
+        return Member(data, self, guild_id)
 
 
 class PartialUser(User):

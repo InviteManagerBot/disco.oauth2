@@ -93,17 +93,3 @@ class Guild:
     def is_owner(self) -> Optional[bool]:
         """Optional[:class:`str`]: Returns if the current user is the owner of the guild."""
         return self._is_owner
-
-    async def fetch_me(self) -> Member:
-        """Fetch the current user member information of this guild.
-
-        You must have the scope `guilds.members.read` to use this.
-
-        Returns
-        -------
-        :class:`Member`
-        """
-        data = await self._http.get_member(
-            self._user._access_token.access_token, self.id
-        )
-        return Member(data, user=self._user, guild=self)

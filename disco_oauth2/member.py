@@ -41,8 +41,8 @@ class Member:
     ----------
     user: :class:`User`
         The user representation of this member.
-    guild: :class:`Guild`
-        The guild that the user is member of.
+    guild_id: :class:`int`
+        The guild ID that the user is member of.
     nick: :class:`str`
         The guild specific nickname of the user.
     roles: :class:`SnowflakeList`
@@ -65,7 +65,7 @@ class Member:
 
     __slots__ = (
         "user",
-        "guild",
+        "guild_id",
         "nick",
         "_avatar_hash",
         "roles",
@@ -78,9 +78,8 @@ class Member:
         "timed_out_until",
     )
 
-    def __init__(self, data: MemberPayload, user: User, guild: Guild) -> None:
+    def __init__(self, data: MemberPayload, user: User, guild_id: int) -> None:
         self.user: User = user
-        self.guild: Guild = guild
 
         # Update the user object with new data
         try:
@@ -88,6 +87,7 @@ class Member:
         except KeyError:
             pass
 
+        self.guild_id: int = guild_id
         self.nick: Optional[str] = data.get("nick")
         self._avatar_hash: Optional[str] = data.get("avatar")
         self.roles: SnowflakeList = data["roles"]
@@ -107,7 +107,7 @@ class Member:
     def __repr__(self) -> str:
         return (
             f"<Member id={self.user.id} name={self.user.name!r} discriminator={self.user.discriminator!r}"
-            f" bot={self.user.bot} nick={self.nick!r} guild={self.guild!r}>"
+            f" bot={self.user.bot} nick={self.nick!r} guild_id={self.guild_id}>"
         )
 
     def __eq__(self, other: object) -> bool:
@@ -142,7 +142,7 @@ class Member:
 
         animated = self._avatar_hash.startswith("a_")
         fmt = "gif" if animated else "png"
-        return f"https://cdn.discordapp.com/guilds/{self.guild.id}/users/{self.user.id}/avatars/{self._avatar_hash}.{fmt}?size=1024"
+        return f"https://cdn.discordapp.com/guilds/{self.guild_id}/users/{self.user.id}/avatars/{self._avatar_hash}.{fmt}?size=1024"
 
     @property
     def display_avatar(self) -> str:
