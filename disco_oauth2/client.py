@@ -76,8 +76,6 @@ class Client:
             http_trace=http_trace,
         )
 
-        self._users: WeakValueDictionary[int, User] = WeakValueDictionary()
-
     async def exchange_code(self, code: str) -> AccessToken:
         """Exchanges the code you receive from the OAuth2 redirect.
 
@@ -126,7 +124,6 @@ class Client:
         """
         data = await self.http.get_user(access_token.access_token)
         user = User(http=self.http, access_token=access_token, data=data)
-        self._users[user.id] = user
         return user
 
     def get_oauth_url(
