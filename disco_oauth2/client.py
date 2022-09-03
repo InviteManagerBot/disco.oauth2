@@ -186,23 +186,6 @@ class Client:
 
         return base
 
-    def get_user(self, id: int, /) -> Optional[User]:
-        """Returns a user with the given ID
-
-        Parameters
-        ----------
-        id: :class:`int`
-            The user's id that you
-            want to find.
-
-        Returns
-        -------
-        Optional[:class:`User`]
-            Returns ``None`` when there's no user with that id
-            in the cache
-        """
-        return self._users.get(id)
-
     def get_partial_user(self, *, access_token: AccessToken) -> PartialUser:
         """Returns a partial user.
 
