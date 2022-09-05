@@ -190,7 +190,7 @@ class BaseHTTP:
     def exchange_code(
         self, code: str, *, scopes: Optional[List[str]] = None
     ) -> Response[AccessTokenResponse]:
-        r = Route("GET", "/oauth2/token")
+        r = Route("POST", "/oauth2/token")
         payload = {
             "client_id": self.client_id,
             "client_secret": self._client_secret,
