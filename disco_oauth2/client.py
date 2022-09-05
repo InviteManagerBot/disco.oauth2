@@ -129,13 +129,14 @@ class Client:
     def get_oauth_url(
         self,
         *,
-        prompt: str = MISSING,
+        prompt: Literal["none", "consent"] = MISSING,
         state: str = MISSING,
         response_type: Literal["code", "token"] = "code",
         disable_guild_select: bool = MISSING,
         guild_id: Snowflake = MISSING,
         permissions: int = MISSING,
         scopes: Iterable[str] = MISSING,
+        redirect_uri: str = MISSING,
     ) -> str:
         """Returns the OAuth2 URL to authorize this application.
 
@@ -165,6 +166,11 @@ class Client:
             Defaults to ``self.scopes``.
 
             .. versionadded:: 1.3
+        redirect_uri: :class:`str`
+            An optional valid redirect URI.
+            Defaults ``self.redirect_uri``
+
+            .. versionadded:: 1.3
 
         Returns
         -------
@@ -182,7 +188,9 @@ class Client:
             base += f"&prompt={prompt}"
         if state is not MISSING:
             base += f"&state={quote(state)}"
-        if "bot" in self.scopes:
+        if redirect_uri is not MISSING:
+            base += f"&redirect_uri={quote(redirect_uri or self.redirect_uri)}"
+        if "bot" in scopes:
             if disable_guild_select is not MISSING:
                 base += f"&disable_guild_select={prompt}"
             if guild_id is not MISSING:
@@ -190,10 +198,7 @@ class Client:
             if permissions is not MISSING:
                 base += f"&permissions={permissions}"
 
-        base += (
-            f"&response_type={response_type}"
-            f"&redirect_uri={quote(self.redirect_uri)}"
-        )
+        base += f"&response_type={response_type}"
 
         return base
 
