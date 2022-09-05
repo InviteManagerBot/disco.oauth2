@@ -13,6 +13,7 @@ from .utils import MISSING, json_or_text
 
 from typing import (
     ClassVar,
+    Iterable,
     Optional,
     TypeVar,
     overload,
@@ -188,7 +189,7 @@ class BaseHTTP:
         return self.request(r, data=payload)
 
     def exchange_code(
-        self, code: str, *, scopes: Optional[List[str]] = None
+        self, code: str, *, scopes: Optional[Iterable[str]] = None
     ) -> Response[AccessTokenResponse]:
         r = Route("POST", "/oauth2/token")
         payload = {
@@ -199,7 +200,7 @@ class BaseHTTP:
             "redirect_uri": self.redirect_uri,
         }
         if scopes:
-            payload["scope"] = scopes
+            payload["scope"] = list(scopes)
 
         return self.request(r, data=payload)
 
