@@ -163,7 +163,7 @@ class Client:
         scopes: Iterable[:class:`str`]
             An optional valid list of scopes.
             Defaults to ``self.scopes``.
-            
+
             .. versionadded:: 1.3
 
         Returns
