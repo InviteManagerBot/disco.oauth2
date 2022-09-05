@@ -1,13 +1,13 @@
 import aiohttp
 import asyncio
 
-from weakref import WeakValueDictionary
-from typing import List, Literal, Optional
+from typing import Literal, Optional, Iterable
 
 from .http import AsyncHTTP
 from .token import AccessToken
 from .user import User, PartialUser
 from .utils import MISSING
+from .types.snowflake import Snowflake
 
 __all__ = ("Client",)
 
@@ -29,7 +29,7 @@ class Client:
         Default ``None``.
     connector: Optional[:class:`aiohttp.BaseConnector`]
         A connector for aiohttp client API.
-        `aiohttp documentation <https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.BaseConnector>`.
+        `aiohttp documentation <https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.BaseConnector>`_.
         Default ``None``.
     loop: Optional[:class:`asyncio.AbstractEventLoop`]
         The event loop of asyncio.
@@ -40,11 +40,11 @@ class Client:
         Default ``None``.
     proxy_auth: Optional[:class:`aiohttp.BasicAuth`]
         Object that represents proxy HTTP Basic Authorization.
-        `aiohttp documentation <https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.BasicAuth>`.
+        `aiohttp documentation <https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.BasicAuth>`_.
         Default ``None``.
     http_trace: Optional[:class:`aiohttp.TraceConfig`]
         The trace configuration to use for tracking HTTP requests the library does using ``aiohttp``.
-        `aiohttp documentation <https://docs.aiohttp.org/en/stable/client_advanced.html#client-tracing>`.
+        `aiohttp documentation <https://docs.aiohttp.org/en/stable/client_advanced.html#client-tracing>`_.
         Default ``None``.
     """
 
@@ -54,7 +54,7 @@ class Client:
         client_id: int,
         client_secret: str,
         redirect_uri: str,
-        scopes: Optional[List[str]] = None,
+        scopes: Optional[Iterable[str]] = None,
         connector: Optional[aiohttp.BaseConnector] = None,
         loop: Optional[asyncio.AbstractEventLoop] = None,
         proxy: Optional[str] = None,
@@ -64,7 +64,7 @@ class Client:
         self.client_id: int = client_id
         self._client_secret: str = client_secret
         self.redirect_uri: str = redirect_uri
-        self.scopes: List[str] = scopes or []
+        self.scopes: Iterable[str] = scopes or ()
         self.http: AsyncHTTP = AsyncHTTP(
             client_id=client_id,
             client_secret=client_secret,
@@ -133,19 +133,20 @@ class Client:
         state: str = MISSING,
         response_type: Literal["code", "token"] = "code",
         disable_guild_select: bool = MISSING,
-        guild_id: int = MISSING,
+        guild_id: Snowflake = MISSING,
         permissions: int = MISSING,
+        scopes: Iterable[str] = MISSING,
     ) -> str:
         """Returns the OAuth2 URL to authorize this application.
 
         Parameters
         ----------
-        prompt: :class:`bool`
+        prompt: :class:`str`
             Controls how existing authorizations are handled, either consent or none.
             You must have scopes set to use this.
         state: :class:`str`
             A unique cryptographically secure hash.
-            _<https://discord.com/developers/docs/topics/oauth2#state-and-security>
+            `discord documentation <https://discord.com/developers/docs/topics/oauth2#state-and-security>`_
         response_type: Literal["code", "token"]
             The response type, either code or token.
             The `token` is for client-side web applications only.
@@ -159,13 +160,23 @@ class Client:
         permissions: :class:`int`
             The permissions flags for the bot invite.
             You must have the scope `bot` to use this.
+        scopes: Iterable[:class:`str`]
+            An optional valid list of scopes.
+            Defaults to ``self.scopes``.
+            
+            .. versionadded:: 1.3
+
+        Returns
+        -------
+            The OAuth2 URL with all the received parameters.
         """
         from urllib.parse import quote
 
         base = f"https://discord.com/api/oauth2/authorize?client_id={self.client_id}"
+        scopes = scopes or self.scopes
 
-        if self.scopes:
-            base += f"&scope={'+'.join(self.scopes)}"
+        if scopes:
+            base += f"&scope={'+'.join(scopes)}"
 
         if prompt is not MISSING:
             base += f"&prompt={prompt}"
