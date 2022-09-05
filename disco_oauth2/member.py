@@ -142,7 +142,7 @@ class Member:
 
         animated = self._avatar_hash.startswith("a_")
         fmt = "gif" if animated else "png"
-        return f"https://cdn.discordapp.com/guilds/{self.guild_id}/users/{self.user.id}/avatars/{self._avatar_hash}.{fmt}?size=1024"
+        return f"https://cdn.discordapp.com/guilds/{self.guild_id}/users/{self.user.id}/avatars/{self._avatar_hash}.{fmt}"
 
     @property
     def display_avatar(self) -> str:

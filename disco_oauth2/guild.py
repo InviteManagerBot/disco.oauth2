@@ -87,7 +87,7 @@ class Guild:
 
         animated = self._icon_hash.startswith("a_")
         fmt = "gif" if animated else "png"
-        return f"https://cdn.discordapp.com/icons/{self.id}/{self._icon_hash}.{fmt}?size=1024"
+        return f"https://cdn.discordapp.com/icons/{self.id}/{self._icon_hash}.{fmt}"
 
     @property
     def is_owner(self) -> Optional[bool]:

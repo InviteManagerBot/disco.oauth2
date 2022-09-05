@@ -101,7 +101,7 @@ class BaseUser:
 
         animated = self._avatar_hash.startswith("a_")
         fmt = "gif" if animated else "png"
-        return f"https://cdn.discordapp.com/avatars/{self.id}/{self._avatar_hash}.{fmt}?size=1024"
+        return f"https://cdn.discordapp.com/avatars/{self.id}/{self._avatar_hash}.{fmt}"
 
     @property
     def default_avatar(self) -> str:
@@ -128,7 +128,7 @@ class BaseUser:
 
         animated = self._banner_hash.startswith("a_")
         fmt = "gif" if animated else "png"
-        return f"https://cdn.discordapp.com/banners/{self.id}/{self._banner_hash}.{fmt}?size=512"
+        return f"https://cdn.discordapp.com/banners/{self.id}/{self._banner_hash}.{fmt}"
 
     @property
     def accent_colour(self) -> Optional[str]:
@@ -192,8 +192,6 @@ class User(BaseUser):
     mfa_enabled: :class:`bool`
         Specifies if the user has MFA turned on.
     """
-
-    __slots__ = ("__weakref__",)
 
     async def refresh(self) -> AccessToken:
         """Refreshes the access token for the user.
