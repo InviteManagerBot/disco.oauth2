@@ -180,6 +180,7 @@ class Client:
 
         base = f"https://discord.com/api/oauth2/authorize?client_id={self.client_id}"
         scopes = scopes or self.scopes
+        redirect_uri = redirect_uri or self.redirect_uri
 
         if scopes:
             base += f"&scope={'+'.join(scopes)}"
@@ -189,7 +190,7 @@ class Client:
         if state is not MISSING:
             base += f"&state={quote(state)}"
         if redirect_uri is not MISSING:
-            base += f"&redirect_uri={quote(redirect_uri or self.redirect_uri)}"
+            base += f"&redirect_uri={quote(redirect_uri)}"
         if "bot" in scopes:
             if disable_guild_select is not MISSING:
                 base += f"&disable_guild_select={prompt}"
