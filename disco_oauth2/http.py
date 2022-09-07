@@ -305,6 +305,14 @@ class AsyncHTTP(BaseHTTP):
                 else:
                     raise HTTPException(resp, data)
 
+        if resp is not None:
+            if resp.status >= 500:
+                raise DiscordServerError(resp, data)
+
+            raise HTTPException(resp, data)
+
+        raise RuntimeError("Unreachable")
+
     async def close(self) -> None:
         if self.__session:
             await self.__session.close()
