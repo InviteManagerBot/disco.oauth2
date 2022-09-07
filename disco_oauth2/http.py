@@ -277,13 +277,13 @@ class AsyncHTTP(BaseHTTP):
                         # Banned by Cloudflare more than likely.
                         raise HTTPException(resp, data)
 
-                    retry_after_secs: int = data["retry_after"] / 1000
+                    retry_after: float = data["retry_after"]
                     _log.warning(
                         "You are being rate limit, trying again after %.2f seconds",
-                        retry_after_secs,
+                        retry_after,
                     )
 
-                    await asyncio.sleep(retry_after_secs)
+                    await asyncio.sleep(retry_after)
                     _log.debug("Done sleeping for the rate limit, retrying...")
                     continue
 
