@@ -21,6 +21,9 @@ from typing import (
     Coroutine,
     Any,
     List,
+    Optional,
+    Union,
+    Dict,
 )
 
 if TYPE_CHECKING:
@@ -251,7 +254,7 @@ class AsyncHTTP(BaseHTTP):
 
         headers = {"User-Agent": self.user_agent, **kwargs.get("headers", {})}
 
-        # discord OAuth2 api requires this Content-Type header
+        # discord OAuth2 api requires this content type Content-Type header
         headers["Content-Type"] = "application/x-www-form-urlencoded"
 
         if self.proxy:
@@ -259,6 +262,8 @@ class AsyncHTTP(BaseHTTP):
         if self.proxy_auth:
             kwargs["proxy_auth"] = self.proxy_auth
 
+        resp: Optional[aiohttp.ClientResponse] = None
+        data: Optional[Union[Dict[str, Any], str]] = None
         # 5 tries
         for trie in range(5):
             async with self.__session.request(method, url, **kwargs) as resp:

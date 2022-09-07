@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Union, Dict
+from typing import TYPE_CHECKING, Any, Optional, Union, Dict
 
 if TYPE_CHECKING:
     from aiohttp import ClientResponse
@@ -40,7 +40,9 @@ class HTTPException(Oauth2Exception):
         e.g. 404, 403, 500
     """
 
-    def __init__(self, response: Response, message: Union[str, Dict[str, Any]]) -> None:
+    def __init__(
+        self, response: Response, message: Optional[Union[str, Dict[str, Any]]]
+    ) -> None:
         self.response: Response = response
         self.status = response.status
 
@@ -49,7 +51,7 @@ class HTTPException(Oauth2Exception):
             self.message: str = message.get("error_description", message.get("message"))
         else:
             self.code: int = 0
-            self.message: str = message
+            self.message: str = message or ""
 
         fmt = "{0.status} {0.reason} (error code: {1})"
         super().__init__(fmt.format(response, self.code))
