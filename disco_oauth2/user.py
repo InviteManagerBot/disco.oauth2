@@ -55,7 +55,7 @@ class BaseUser:
     def _update(self, data: UserPayload):
         self.id: int = int(data["id"])
         self.name: str = data["username"]
-        self.discriminator: int = int(data["discriminator"])
+        self.discriminator: str = data["discriminator"]
         self.email: Optional[str] = data.get("email", None)
         self._avatar_hash: Optional[str] = data["avatar"]
         self._banner_hash: Optional[str] = data.get("banner", None)
