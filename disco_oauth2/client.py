@@ -30,10 +30,6 @@ class Client:
         A connector for aiohttp client API.
         `aiohttp documentation <https://docs.aiohttp.org/en/stable/client_reference.html#aiohttp.BaseConnector>`_.
         Default ``None``.
-    loop: Optional[:class:`asyncio.AbstractEventLoop`]
-        The event loop of asyncio.
-        This loop will be only used at the instance of :class:`aiohttp.ClientSession`.
-        Default ``None``.
     proxy: Optional[:class:`str`]
         The proxy URL.
         Default ``None``.
