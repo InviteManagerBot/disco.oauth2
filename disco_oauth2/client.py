@@ -1,5 +1,4 @@
 import aiohttp
-import asyncio
 
 from typing import Literal, Optional, Iterable
 
@@ -56,7 +55,6 @@ class Client:
         redirect_uri: str,
         scopes: Optional[Iterable[str]] = None,
         connector: Optional[aiohttp.BaseConnector] = None,
-        loop: Optional[asyncio.AbstractEventLoop] = None,
         proxy: Optional[str] = None,
         proxy_auth: Optional[aiohttp.BasicAuth] = None,
         http_trace: Optional[aiohttp.TraceConfig] = None,
@@ -70,7 +68,6 @@ class Client:
             client_secret=client_secret,
             redirect_uri=redirect_uri,
             connector=connector,
-            loop=loop,
             proxy=proxy,
             proxy_auth=proxy_auth,
             http_trace=http_trace,

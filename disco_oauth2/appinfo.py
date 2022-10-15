@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
-    from .types import IntegrationApp as IntegrationAppPayload, User as UserPayload
+    from .types import IntegrationApp as IntegrationAppPayload
 
 __all__ = ("IntegrationApp",)
 

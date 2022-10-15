@@ -21,7 +21,6 @@ from typing import (
     Coroutine,
     Any,
     List,
-    Optional,
     Union,
     Dict,
 )
@@ -216,7 +215,6 @@ class AsyncHTTP(BaseHTTP):
         client_id: int,
         client_secret: str,
         redirect_uri: str,
-        loop: Optional[asyncio.AbstractEventLoop] = None,
         proxy: Optional[str] = None,
         proxy_auth: Optional[aiohttp.BasicAuth] = None,
         http_trace: Optional[aiohttp.TraceConfig] = None,
@@ -229,7 +227,6 @@ class AsyncHTTP(BaseHTTP):
             redirect_uri=redirect_uri,
         )
         self.connector: Optional[aiohttp.BaseConnector] = connector
-        self.loop: Optional[asyncio.AbstractEventLoop] = loop
         self.http_trace: Optional[aiohttp.TraceConfig] = http_trace
         self.__session: aiohttp.ClientSession = self._create_session()
 
@@ -245,7 +242,6 @@ class AsyncHTTP(BaseHTTP):
         return aiohttp.ClientSession(
             connector=self.connector,
             trace_configs=None if self.http_trace is None else [self.http_trace],
-            loop=self.loop,
         )
 
     async def request(self, route: Route, **kwargs: Any) -> Any:

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Optional, List, TYPE_CHECKING
 
-from .member import Member
 from .flags import Permissions
 
 if TYPE_CHECKING:

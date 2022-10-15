@@ -10,7 +10,6 @@ if TYPE_CHECKING:
     from .types import (
         ServerIntegration as ServerIntegrationPayload,
         IntegrationType,
-        IntegrationAccount as IntegrationAccountPayload,
         Snowflake,
         IntegrationApp as IntegrationAppPayload,
         IntegrationAccount as IntegrationAccountPayload,
