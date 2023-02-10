@@ -113,15 +113,6 @@ class BaseHTTP:
 
     # Api methods
 
-    def get_current_auth(self) -> Response[Any]:
-        r = Route("GET", "/oauth2/@me")
-        payload = {
-            "client_id": self.client_id,
-            "client_secret": self._client_secret,
-        }
-
-        return self.request(r, data=payload)
-
     def get_user(self, access_token: str) -> Response[User]:
         r = Route("GET", "/users/@me")
         headers = {"Authorization": f"Bearer {access_token}"}
@@ -180,7 +171,7 @@ class BaseHTTP:
         return self.request(r, headers=headers)
 
     def refresh_token(self, refresh_token: str) -> Response[AccessTokenResponse]:
-        r = Route("GET", "/oauth2/token")
+        r = Route("POST", "/oauth2/token")
         payload = {
             "client_id": self.client_id,
             "client_secret": self._client_secret,
@@ -201,9 +192,21 @@ class BaseHTTP:
             "code": code,
             "redirect_uri": self.redirect_uri,
         }
-        if scopes:
+        if scopes is not None:
             payload["scope"] = list(scopes)
 
+        return self.request(r, data=payload)
+
+    def revoke_token(
+        self,
+        token: str,
+    ) -> Response[None]:
+        r = Route("POST", "/oauth2/token/revoke")
+        payload = {
+            "client_id": self.client_id,
+            "client_secret": self._client_secret,
+            "token": token,
+        }
         return self.request(r, data=payload)
 
 

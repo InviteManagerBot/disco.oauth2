@@ -200,8 +200,8 @@ class User(BaseUser):
         -------
         :class:`AccessToken`
         """
-        access_token = self._access_token.access_token
-        data = await self._http.refresh_token(refresh_token=access_token)
+        refresh_token = self._access_token.refresh_token
+        data = await self._http.refresh_token(refresh_token)
         self._access_token = AccessToken(data)
         return self._access_token
 

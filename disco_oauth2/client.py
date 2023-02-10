@@ -100,6 +100,22 @@ class Client:
         data = await self.http.refresh_token(refresh_token)
         return AccessToken(data)
 
+    async def revoke_token(self, token: str) -> None:
+        """Revokes a token, token can be either an access token or an refresh token.
+        This can be useful to invalidate the previous token.
+
+        `RFC7009 <https://www.rfc-editor.org/rfc/rfc7009>`_.
+
+        .. note::
+            Invalid tokens **do not** cause an error response.
+
+        Parameters
+        ---------
+        token: :class:`str`
+            The refresh or access token that will get revoked.
+        """
+        await self.http.revoke_token(token)
+
     async def fetch_user(self, access_token: AccessToken) -> User:
         """Fetch user's information from discord api using user's access token.
 
